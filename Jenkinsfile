@@ -22,11 +22,11 @@ pipeline {
     }
     post {
         always{
-            emailext{
+            emailext(
+                to: 'dechikarenkov@gmail.com',  
                 subject: 'Результат сборки',
-                body: 'Сборка завершена. Docker-образ готов.',
-                to: 'dechikarenkov@gmail.com'    
-            }
+                body: 'Сборка завершена. Docker-образ готов.'   
+            )
         }
     }
 
