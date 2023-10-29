@@ -8,9 +8,7 @@ pipeline {
         }
         stage('Build and Test') {
             steps {
-                dir('sources') {
-                sh 'python hello.py'
-                }
+                sh 'python3 hello.py'
             }
         }
     }
