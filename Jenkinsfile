@@ -22,15 +22,15 @@ pipeline {
         stage ('Tag Docker Image') {
             steps {
                 script {
-                    sh 'docker tag my-app:latest ibreakway/jenkins_project/my-app:latest'
+                    sh 'docker tag my-app:latest jenkins_project/my-app:latest'
                 }
             }
         }
         stage('Push Docker Image') {
             steps {
                 script {
-                     docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials') {
-                          sh 'docker push ibreakway/jenkins_project/my-app:latest'
+                     withDockerRegistry([credentialsId: "docker-credentials", url: "'https://registry.hub.docker.com'"] 'docker-credentials') {
+                     bat "docker push jenkins_project/my-app:latest"
                     }
                 }
             }
