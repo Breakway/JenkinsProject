@@ -19,11 +19,18 @@ pipeline {
                 }
             }
         }
+        stage ('Tag Docker Image') {
+            steps {
+                script {
+                    sh 'docker tag my-app:latest jenkins_project/my-app:latest'
+                }
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
                      docker.withRegistry([credentialsId: "docker-credentials", url: "'https://registry.hub.docker.com'"]) {
-                     bat "docker push jenkins_project/my-app:latest"
+                     sh "docker push jenkins_project/my-app:latest"
                     }
                 }
             }
