@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                      docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials') {
-                          sh 'docker push ibreakway/jenkins_project/my-app:latest'
+                          sh 'docker push https://hub.docker.com/repository/docker/ibreakway/jenkins_project/'
                     }
                 }
             }
