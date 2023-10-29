@@ -13,7 +13,7 @@ pipeline {
                 }
 
                 script {
-                        dcoker.image('my-app:latest').inside {
+                        docker.image('my-app:latest').inside {
                         sh 'python3 hello.py'
                         }
                 }
