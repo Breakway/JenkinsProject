@@ -19,6 +19,14 @@ pipeline {
                 }
             }
         }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                     docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials') {
+                          sh 'docker push IBreakway/my-app:latest'
+                }
+            }
+        }
     }
     post {
         always{
