@@ -29,7 +29,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                     withDockerRegistry([credentialsId: "docker-credentials", url: "'https://registry.hub.docker.com'"] 'docker-credentials') {
+                     withDockerRegistry([credentialsId: "docker-credentials", url: "'https://registry.hub.docker.com'"]) {
                      bat "docker push jenkins_project/my-app:latest"
                     }
                 }
