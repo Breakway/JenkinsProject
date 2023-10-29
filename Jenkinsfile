@@ -28,15 +28,14 @@ pipeline {
                 }
             }
         }
-        post {
-            always{
-                emailext(
-                    to: 'dechikarenkov@gmail.com',  
-                    subject: 'Результат сборки',
-                    body: 'Сборка завершена. Docker-образ готов.'   
-                )
-            }
+    }
+    post {
+        always{
+            emailext(
+                to: 'dechikarenkov@gmail.com',  
+                subject: 'Результат сборки',
+                body: 'Сборка завершена. Docker-образ готов.'   
+            )
         }
-
     }
 }
