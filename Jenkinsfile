@@ -22,7 +22,7 @@ pipeline {
         stage ('Tag Docker Image') {
             steps {
                 script {
-                    sh 'docker tag my-app:latest jenkins_project/my-app:latest'
+                    sh 'docker tag my-app:latest ibreakway/jenkins_project/my-app:latest'
                 }
             }
         }
