@@ -13,11 +13,11 @@ pipeline {
                 }
 
                 script {
-                    dcoker.image('my-app:latest').inside {
-                    sh 'python3 hello.py'
-                    }
+                        dcoker.image('my-app:latest').inside {
+                        sh 'python3 hello.py'
+                        }
+                }
             }
         }
     }
-}
 }
