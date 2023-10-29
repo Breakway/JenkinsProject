@@ -24,19 +24,19 @@ pipeline {
                 script {
                      docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials') {
                           sh 'docker push IBreakway/my-app:latest'
+                    }
                 }
             }
         }
-    }
-    post {
-        always{
-            emailext(
-                to: 'dechikarenkov@gmail.com',  
-                subject: 'Результат сборки',
-                body: 'Сборка завершена. Docker-образ готов.'   
-            )
+        post {
+            always{
+                emailext(
+                    to: 'dechikarenkov@gmail.com',  
+                    subject: 'Результат сборки',
+                    body: 'Сборка завершена. Docker-образ готов.'   
+                )
+            }
         }
-    }
 
     }
 }
