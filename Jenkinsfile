@@ -22,7 +22,7 @@ pipeline {
         stage ('Tag Docker Image') {
             steps {
                 script {
-                    sh 'docker tag my-app:latest jenkins_project/my-app:latest'
+                    sh 'docker tag my-app:latest ibreakway/jenkins_project'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                         sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
                     }
                     
-                    sh 'docker push jenkins_project/my-app:latest'
+                    sh 'docker push ibreakway/jenkins_project/my-app:latest'
                 }
             }
         }
