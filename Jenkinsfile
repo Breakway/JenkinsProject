@@ -9,7 +9,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    docker.build('my-app:latest')
+                    docker.build('ibreakway/jenkins_project/my-app:latest')
                 }
 
                 script {
