@@ -8,7 +8,14 @@ pipeline {
         }
         stage('Build and Test') {
             steps {
-                sh 'python3 hello.py'
+                script {
+                    docker.build('my-app:latest')
+                }
+
+                script {
+                    dcoker.image('my-app:latest').inside {
+                    sh 'python3 hello.py'
+                    }
             }
         }
     }
