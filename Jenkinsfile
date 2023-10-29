@@ -23,8 +23,8 @@ pipeline {
     post {
         always{
             emailext{
-                subject: "Результат сборки",
-                body: "Сборка завершена. Docker-образ готов.",
+                subject: 'Результат сборки',
+                body: 'Сборка завершена. Docker-образ готов.',
                 to: 'dechikarenkov@gmail.com'    
             }
         }
