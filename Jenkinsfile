@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                    sh 'docker build - t ibreakway/jenkins_unstable:latest .'
+                    sh 'docker build -t ibreakway/jenkins_unstable:latest .'
             }
         }
         stage('Login') {
