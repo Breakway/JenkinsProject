@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Push') {
             steps {       
-                  sh 'docker push ibreakway/jenkins_instable:latest'
+                  sh 'docker push ibreakway/jenkins_unstable:latest'
                 }
             }
         }
