@@ -1,50 +1,33 @@
 pipeline {
     agent any
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
+    }
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                script {
-                    docker.build('ibreakway/jenkins_project/my-app:latest')
-                }
-
-                script {
-                        docker.image('my-app:latest').inside {
-                        sh 'python3 hello.py'
-                        }
+                    sh 'docker build - t ibreakway/jenkins_project:latest'
+            }
+        }
+        Stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Push') {
+            steps {       
+                  sh 'docker push ibreakway/jenkins_project:latest'
                 }
             }
         }
-        stage ('Tag Docker Image') {
-            steps {
-                script {
-                    sh 'docker tag my-app:latest ibreakway/jenkins_project'
-                }
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                        withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                        sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
-                    }
-                    
-                    sh 'docker push ibreakway/jenkins_project/my-app:latest'
-                }
-            }
-        }
-    }
     post {
         always{
-            emailext(
-                to: 'dechikarenkov@gmail.com',  
-                subject: 'Результат сборки',
-                body: 'Сборка завершена. Docker-образ готов.'   
-            )
+           sh 'docker logout'
         }
     }
 }
